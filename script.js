@@ -1,5 +1,6 @@
 let screenWidth = window.innerWidth;
 
+
 if (screenWidth <= 1000){
     // Конвертация таблицы под мобильную версию
     function responseTable(table){
@@ -8,7 +9,7 @@ if (screenWidth <= 1000){
         // Количество строк равно количеству табов
         let itemTabsRow = document.querySelectorAll('tr', workTable);
         //Количество столбцов
-        let itemColums = document.querySelectorAll('tr:first-child td', workTable).length;
+        let itemColums = document.querySelectorAll('tr:first-child td', workTable);
         // блок с текущим заголовком
         let callHeader = '';
         //значение тякущей ячейки для передачи в таб
@@ -28,36 +29,52 @@ if (screenWidth <= 1000){
         for(i = 0; i < itemTabsRow.length; i++){
             // Создаем элементы навигации по количеству строк
             tabsNav.appendChild(document.createElement('li'));
+            
             // Создаем боксы с табами по количеству строк
             var elem = document.createElement('div');
             elem.className = 'tabsHolder';
             tabsNav.after(elem); 
             
+            
             // Разбираем каждую строку таблицы
             
+        
+            // Из первой строки выбираем ячейки для заголовков
+            if(i == 0 ){
+                for(j = 0; j < itemColums.length; j++){
+                    callHeader += '<p>'+document.querySelectorAll('tr:first-child td',itemTabsRow[0])[j].innerHTML+'<span></span></p>';
+                    
+            // console.log(colHeader);
+                }
+            }         
             
-//            TODO 
-//            Тут нужно будет перебрать значения ячеек первой строки и раскидать их по кнопкам дабов
-            // Выбираем ячейку с заголовком
-            var text = document.querySelectorAll('td',itemTabsRow[i]).innerHTML;
-            
-            
-            console.log(itemTabsRow[i])
+            console.log()
         }
         
+//        TODO
+//        Тут нужно пройтись по первым ячейкам каждой строки и перетащить значение каждой из них в li от табов
+        
+        for(i = 0; i < itemTabsRow.length; i++){
+            if(i != 0){
+                var buttonText = document.querySelectorAll('td:first-child',itemTabsRow[i]);
+                
+                console.log(buttonText);
+            }
+        }
+        
+        // Добавляем заголовки строк к табам
+        for(i = 0; i < itemTabsRow.length; i++){
+            document.querySelectorAll('.tabsHolder')[i].innerHTML = callHeader;
+        }
 
         
-        
-        
-        
-        
+
     }
     
-    
-    
+
     responseTable('tableTransform');  
 }
-
+ 
 
 
 

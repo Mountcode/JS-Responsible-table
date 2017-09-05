@@ -35,43 +35,36 @@ if (screenWidth <= 1000){
             elem.className = 'tabsHolder';
             tabsNav.after(elem); 
             
+            // Разбираем каждую строку таблицы*************************************************************
             
-            // Разбираем каждую строку таблицы
-            
-        
             // Из первой строки выбираем ячейки для заголовков
             if(i == 0 ){
-                for(j = 0; j < itemColums.length; j++){
+                for(j = 0; j < itemColums.length; j++){  
                     callHeader += '<p>'+document.querySelectorAll('tr:first-child td',itemTabsRow[0])[j].innerHTML+'<span></span></p>';
-                    
-            // console.log(colHeader);
                 }
-            }         
-            
-            console.log()
+            }    
         }
         
-//        TODO
-//        Тут нужно пройтись по первым ячейкам каждой строки и перетащить значение каждой из них в li от табов
+        //  Делаем активным первый таб
+        document.querySelectorAll('.tabsHolder')[0].className += ' active';
+        
+        //  Проходимся по первым ячейкам каждой строки и забираем значение для названия кнопки таба
         
         for(i = 0; i < itemTabsRow.length; i++){
             if(i != 0){
-                var buttonText = document.querySelectorAll('td:first-child',itemTabsRow[i]);
+                var buttonText = itemTabsRow[i].querySelectorAll('td:first-child')[0].innerHTML;
+                document.querySelectorAll('.tableTransormTabsControls li')[i].innerHTML =  buttonText;
                 
-                console.log(buttonText);
+                //TODO проходимся по ячейкам в строке и переносим их значение в строку к табу*************
+               
             }
-        }
-        
-        // Добавляем заголовки строк к табам
-        for(i = 0; i < itemTabsRow.length; i++){
+            // Добавляем заголовки строк к табам
             document.querySelectorAll('.tabsHolder')[i].innerHTML = callHeader;
         }
-
         
-
+        
+        
     }
-    
-
     responseTable('tableTransform');  
 }
  

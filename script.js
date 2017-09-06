@@ -25,7 +25,7 @@ if (screenWidth <= 1000){
                 // Создаем элементы навигации по количеству строк (без строки заголовков)
                 tabsNav.appendChild(document.createElement('li'));
                 // Создаем боксы с табами по количеству строк (без строки заголовков)
-                var elem = document.createElement('div');
+                let elem = document.createElement('div');
                 elem.className = 'tabsHolder';
                 
                 tabsNav.after(elem); 
@@ -57,13 +57,13 @@ if (screenWidth <= 1000){
             
             if(i != 0){
                 //  Добавляем заголовки кнопкам
-                var buttonText = itemTabsRow[i].querySelectorAll('td')[0].innerHTML;
+                let buttonText = itemTabsRow[i].querySelectorAll('td')[0].innerHTML;
                 document.querySelectorAll('.tableTransormTabsControls li')[i-1].innerHTML = buttonText;
 
                 for(j = 0; j < itemColums.length; j++){
                     // Добавляем информацию из строк в табы
-                    var param = itemTabsRow[i].querySelectorAll('td')[j].innerHTML;
-                    var paramPlace = document.querySelectorAll('.tabsHolder')[i-1];
+                    let param = itemTabsRow[i].querySelectorAll('td')[j].innerHTML;
+                    let paramPlace = document.querySelectorAll('.tabsHolder')[i-1];
 
                     paramPlace.querySelectorAll('span')[j].innerHTML = param; 
                 }
@@ -76,16 +76,20 @@ if (screenWidth <= 1000){
         for(i = 0; i < itemTabsRow.length - 1; i++){
             document.querySelectorAll('.tableTransormTabsControls li')[i].onclick = function(){
                 //  Анимация кнопок
-                for (var j = 0; j < itemTabsRow.length - 1; j++) {
+                for (let j = 0; j < itemTabsRow.length - 1; j++) {
                    document.querySelectorAll('.tableTransormTabsControls li')[j].classList.remove('active'); 
                 }
                 this.className += " active";
                 
                 //  Анимация табов
-                for (var j = 0; j < itemTabsRow.length - 1; j++) {
+                for (let j = 0; j < itemTabsRow.length - 1; j++) {
                     document.querySelectorAll('.tabsHolder')[j].classList.remove('active');
+
                     if(document.querySelectorAll('.tabsHolder')[j].getAttribute('data-tab') == this.getAttribute('data-tab')){
-                        document.querySelectorAll('.tabsHolder')[j].className += " active";
+                        let thisTab = j;
+                        setTimeout(function() {
+                            document.querySelectorAll('.tabsHolder')[thisTab].className += " active";
+                        }, 100);
                     }
                 }
             }
